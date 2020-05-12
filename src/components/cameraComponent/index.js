@@ -1,25 +1,28 @@
-import React, { useRef} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
+/*
+    UNICO PARAMETRO OBRIGATÓRIO QUE DEEVE SER PASSADO É O 'CameraRef'
+*/
 
-export function CameraComponent({ Orientation, code }){
-    const camera = useRef();
+export function CameraComponent({ CameraRef, Orientation, Flash, Code, PermissionAudio, ...props}){
 
     return (
         <RNCamera
-            ref={camera}
+            ref={CameraRef}
             style={styles.preview}
             type={Orientation ? Orientation : RNCamera.Constants.Type.back}
-            flashMode={RNCamera.Constants.FlashMode.on}
+            flashMode={Flash ? Flash : RNCamera.Constants.FlashMode.off}
             androidCameraPermissionOptions={{
-                title: 'Permission to use camera',
-                message: 'We need your permission to use your camera',
+                title: 'Permissão para usar a câmera',
+                message: 'Precisamos da sua permissão para usar sua câmera',
                 buttonPositive: 'Ok',
-                buttonNegative: 'Cancel', 
+                buttonNegative: 'Cancelar', 
             }}
-            androidRecordAudioPermissionOptions={null}
-            onBarCodeRead={code ? code : null}
+            androidRecordAudioPermissionOptions={PermissionAudio ? PermissionAudio : null}
+            onBarCodeRead={Code ? Code : null}
+            {...props}
         />
     );
 }

@@ -1,21 +1,46 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
-import {Dashboard} from './pages/dashboard';
+import {Photography} from './pages/photography';
+import {Recording} from './pages/recording';
+import {ScanCode} from './pages/scanCode';
 
-const AppStack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 export function Routes(){
     return (
         <NavigationContainer>
-            <AppStack.Navigator initialRouteName="Home">
-                <AppStack.Screen 
-                    name="Home" 
-                    component={Dashboard} 
-                    options={{headerShown: false}}
+            <Tab.Navigator
+                initialRouteName="Foto"
+                shifting={true}
+                sceneAnimationEnabled={false}
+            >
+                <Tab.Screen 
+                    name="Vídeo"
+                    component={Recording}
+                    options={{
+                        tabBarIcon: 'camcorder-box',
+                        tabBarColor: 'red'
+                    }}
                 />
-            </AppStack.Navigator>
+                <Tab.Screen 
+                    name="Foto"
+                    component={Photography}
+                    options={{
+                        tabBarIcon: 'camera',
+                        tabBarColor: 'blue',
+                    }}
+                />
+                <Tab.Screen 
+                    name="QRCode"
+                    component={ScanCode}
+                    options={{
+                        tabBarIcon: 'qrcode-scan',
+                        tabBarColor: 'green'
+                    }}
+                />
+            </Tab.Navigator>
         </NavigationContainer>
     );
 }

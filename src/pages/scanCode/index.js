@@ -1,25 +1,20 @@
-import React from 'react';
-import { RNCamera } from 'react-native-camera';
+import React, {useRef} from 'react';
+import {useIsFocused} from '@react-navigation/native';
 import {CameraComponent} from '../../components/cameraComponent';
 
-const cameraOrientation = RNCamera.Constants.Type.back;
-
-function dd(coder){
-    alert(coder.data);
+function handleQrCode(code){
+    alert(code.data);
 }
 
 export function ScanCode(){
+    const isFocused = useIsFocused();
+    const camera = useRef();
+  
+    
     return (
         <CameraComponent 
-            Orientation={cameraOrientation} 
-            //code={(coder) => dd(coder)}
+            CameraRef={camera}
+            Code={isFocused ? (code) => handleQrCode(code) : null}
         />
     );
 }
-
-const permissionOptions =  ({
-    title: 'Permission to use camera',
-    message: 'We need your permission to use your camera',
-    buttonPositive: 'Ok',
-    buttonNegative: 'Cancel', 
-})

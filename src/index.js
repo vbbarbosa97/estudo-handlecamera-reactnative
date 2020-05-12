@@ -1,8 +1,11 @@
 import React from 'react';
-import {Routes} from './routes';
+import { Provider } from 'react-native-paper';
+import { Routes } from './routes';
 
-export function App(){
+export function App() {
     return (
-        <Routes />
+        <Provider>
+            <Routes />
+        </Provider>
     );
 }
