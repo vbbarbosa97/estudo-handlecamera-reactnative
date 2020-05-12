@@ -11,7 +11,7 @@ export function CameraComponent({ CameraRef, Orientation, Flash, Code, Permissio
     return (
         <RNCamera
             ref={CameraRef}
-            style={styles.preview}
+            style={{...StyleSheet.absoluteFill}}
             type={Orientation ? Orientation : RNCamera.Constants.Type.back}
             flashMode={Flash ? Flash : RNCamera.Constants.FlashMode.off}
             androidCameraPermissionOptions={{
@@ -26,11 +26,3 @@ export function CameraComponent({ CameraRef, Orientation, Flash, Code, Permissio
         />
     );
 }
-
-const styles = StyleSheet.create({
-    preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    }
-})
